@@ -1,0 +1,62 @@
+version: '3.7'
+
+services:
+  app:
+   build: .
+   container_name: microservice-videos-app
+   volumes:
+       - .:/var/www
+       - ./.docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+   networks:
+       - app-network
+   depends_on:
+       - redis
+       - mssql
+
+  nginx:
+    build: .docker/nginx
+    container_name: microservice-videos-nginx
+    restart: always
+    tty: true
+    ports:
+        - "8000:80"
+    volumes:
+        - .:/var/www
+    networks:
+        - app-network
+    depends_on:
+        - app
+
+  redis:
+    image: redis:alpine
+    container_name: microservice-videos-redis
+    networks:
+        - app-network
+
+  mssql:
+    container_name: sql-server
+    image: mcr.microsoft.com/mssql/server:2017-CU11-ubuntu
+    restart: always
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 1433:1433
+#    volumes:
+ #     - ./.docker/mssql/data:/var/opt/mssql
+    networks:
+        - app-network
+
+  mssqltools:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      - mssql
+    volumes:
+      - ./.docker/mssql/initdb.sql:/tmp/init.sql
+    command: sh -c "sleep 5s && /opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P ${DB_PASSWORD} -d master -i /tmp/init.sql"
+    networks:
+        - app-network
+
+networks:
+    app-network:
+        driver: bridge
