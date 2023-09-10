@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AtualizarCategoriaRequisicao;
+use App\Http\Requests\AtualizarPostagemRequisicao;
 use App\Http\Requests\StorePostagemRequest;
 use App\Http\Resources\PostagemRecurso;
 use Core\Domain\Entity\Postagem;
@@ -14,6 +14,7 @@ use Core\UseCase\DTO\Postagem\PostagemInputDto;
 use Core\UseCase\Postagem\AtualizarPostagemCasoDeUso;
 use Core\UseCase\Postagem\CriarPostagemCasoDeUso;
 use Core\UseCase\Postagem\DeletarPostagemCasoDeUso;
+use Core\UseCase\Postagem\ListarPostagemCasoDeUso;
 use Core\UseCase\Postagem\ListarPostagensCasoDeUso;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -51,6 +52,7 @@ class PostagemControlador extends Controller
             input: new CriarPostagemInputDto(
                 titulo: $request->titulo,
                 texto: $request->texto,
+                slug: Postagem::slugify($request->titulo)
             )
         );
 
@@ -59,14 +61,14 @@ class PostagemControlador extends Controller
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
-    public function mostrar(ListarPostagensCasoDeUso $useCase, $id)
+    public function show(ListarPostagemCasoDeUso $useCase, $id)
     {
-        $category = $useCase->executar(new ListarPostagemInputDto($id));
+        $postagem = $useCase->executar(new PostagemInputDto($id));
 
-        return (new PostagemRecurso($category))->response();
+        return (new PostagemRecurso($postagem))->response();
     }
 
-    public function atualizar(AtualizarCategoriaRequisicao $request, AtualizarPostagemCasoDeUso $useCase, $id)
+    public function update(AtualizarPostagemRequisicao $request, AtualizarPostagemCasoDeUso $useCase, $id)
     {
         $response = $useCase->executar(
             input: new AtualizarPostagemInputDto(
@@ -81,7 +83,7 @@ class PostagemControlador extends Controller
             ->response();
     }
 
-    public function destruir(DeletarPostagemCasoDeUso $useCase, $id)
+    public function destroy(DeletarPostagemCasoDeUso $useCase, $id)
     {
         $useCase->executar(new PostagemInputDto($id));
 
