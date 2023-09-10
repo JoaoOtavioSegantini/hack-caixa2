@@ -46,7 +46,7 @@ class DeletePostagemCasoDeUsoUnitTest extends TestCase
         $this->mockRepo = Mockery::mock(stdClass::class, RepositorioPostagemInterface::class);
         $this->mockRepo->shouldReceive('deletar')->andReturn(false);
 
-        $this->mockInputDto = Mockery::mock(CategoryInputDto::class, [$uuid]);
+        $this->mockInputDto = Mockery::mock(PostagemInputDto::class, [$uuid]);
 
         $useCase = new DeletarPostagemCasoDeUso($this->mockRepo);
         $responseUseCase = $useCase->executar($this->mockInputDto);

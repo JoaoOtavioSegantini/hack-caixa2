@@ -19,12 +19,12 @@ class ListarPostagensCasoDeUsoTest extends TestCase
 
     public function test_list_all()
     {
-        $categoriesDb = Model::factory()->count(20)->create();
+        $postagensDB = Model::factory()->count(20)->create();
 
         $responseUseCase = $this->createUseCase();
 
         $this->assertCount(15, $responseUseCase->items);
-        $this->assertEquals(count($categoriesDb), $responseUseCase->total);
+        $this->assertEquals(count($postagensDB), $responseUseCase->total);
     }
 
     private function createUseCase()

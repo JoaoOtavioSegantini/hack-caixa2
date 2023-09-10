@@ -7,6 +7,7 @@ class CriarPostagemInputDto
     public function __construct(
         public string $titulo = '',
         public string $texto = '',
+        public string $slug = '',
     ) {
     }
 }

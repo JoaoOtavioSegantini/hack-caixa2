@@ -1,6 +1,7 @@
 <?php
 
 namespace Core\UseCase\Postagem;
+use Core\Domain\Entity\Postagem;
 use Core\Domain\Repository\RepositorioPostagemInterface;
 use Core\UseCase\DTO\Postagem\AtualizarPostagem\AtualizarPostagemInputDto;
 use Core\UseCase\DTO\Postagem\AtualizarPostagem\AtualizarPostagemOutputDto;
@@ -30,7 +31,7 @@ class AtualizarPostagemCasoDeUso
             id: $postagemAtualizada->id,
             titulo: $postagemAtualizada->titulo,
             texto: $postagemAtualizada->texto,
-            slug: $postagemAtualizada->slug,
+            slug: Postagem::slugify($postagemAtualizada->titulo),
             created_at: $postagemAtualizada->createdAt(),
         );
     }

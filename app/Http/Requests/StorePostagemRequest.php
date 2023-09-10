@@ -26,15 +26,13 @@ class StorePostagemRequest extends FormRequest
         return [
             'titulo' => [
                 'required',
-                'min:3',
+                'min:5',
                 'max:30',
             ],
             'texto' => [
-                'min:3'
-            ],
-            'slug' => [
                 'required',
-            ],
+                'min:5'
+            ]
         ];
     }
 }

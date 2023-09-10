@@ -26,4 +26,5 @@ trait MetodosMagicosTrait
         return $this->createdAt->format('Y-m-d H:i:s');
     }
 
+
 }

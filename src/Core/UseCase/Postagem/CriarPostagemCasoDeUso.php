@@ -29,7 +29,7 @@ class CriarPostagemCasoDeUso
             id: $novaPostagem->id(),
             titulo: $novaPostagem->titulo,
             texto: $novaPostagem->texto,
-            slug: $novaPostagem->slug,
+            slug: Postagem::slugify($novaPostagem->titulo),
             created_at: $postagem->createdAt(),
         );
     }

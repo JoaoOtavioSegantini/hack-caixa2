@@ -35,21 +35,14 @@ class Postagem
 
     protected function validar()
     {
-
         DominioValidacao::naoNulo($this->titulo);
         DominioValidacao::naoNulo($this->texto);
-
         DominioValidacao::tamanhoMaximo($this->titulo, 30);
+        DominioValidacao::tamanhoMinimo($this->titulo, 5);
         DominioValidacao::tamanhoMinimo($this->texto, 5);
-       # DominioValidacao::nuloeTamanhoMaximo($this->titulo);
-
-    //    if (isset($this->titulo)) {
-    //       $this->slug = $this->slugify($this->titulo);
-    //    }
-
     }
 
-    public static function slugify($text, string $divider = '-') : string
+    public static function slugify($text, string $divider = '-'): string
     {
         // replace non letter or digits by divider
         $text = preg_replace('~[^\pL\d]+~u', $divider, $text);

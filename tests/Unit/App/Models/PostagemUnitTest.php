@@ -28,7 +28,7 @@ class PostagemUnitTest extends ModelTestCase
             'id',
             'titulo',
             'texto',
-            'slug',
+            'slug'
         ];
     }
 
@@ -38,7 +38,6 @@ class PostagemUnitTest extends ModelTestCase
             'id' => 'string',
             'titulo' => 'string',
             'texto' => 'string',
-            'slug' => 'string',
             'deleted_at' => 'datetime',
         ];
     }

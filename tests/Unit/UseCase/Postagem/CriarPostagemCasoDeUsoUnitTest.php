@@ -32,7 +32,8 @@ class CriarPostagemCasoDeUsoUnitTest extends TestCase
 
         $this->mockInputDto = Mockery::mock(CriarPostagemInputDto::class, [
             $nomeTitulo,
-            $nomePostagem
+            $nomePostagem,
+            Postagem::slugify($nomeTitulo)
         ]);
 
         $useCase = new CriarPostagemCasoDeUso($this->mockRepo);

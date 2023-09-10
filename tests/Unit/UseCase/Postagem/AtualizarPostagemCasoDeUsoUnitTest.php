@@ -17,12 +17,13 @@ class AtualizarPostagemCasoDeUsoUnitTest extends TestCase
     public function testRenomearPostagem()
     {
         $uuid = (string) Uuid::uuid4()->toString();
-        $titulo = 'Name';
+        $titulo = 'Novo nome';
         $texto = 'novo post novo post novo post';
 
         $this->mockEntity = Mockery::mock(PostagemEntity::class, [
             $uuid, $titulo, $texto
         ]);
+
         $this->mockEntity->shouldReceive('atualizar');
         $this->mockEntity->shouldReceive('createdAt')->andReturn(date('Y-m-d H:i:s'));
 
@@ -33,7 +34,8 @@ class AtualizarPostagemCasoDeUsoUnitTest extends TestCase
         $this->mockInputDto = Mockery::mock(AtualizarPostagemInputDto::class, [
             $uuid,
             'new title',
-            'new text body new text body'
+            'new text body new text body',
+            PostagemEntity::slugify('new title')
         ]);
 
         $useCase = new AtualizarPostagemCasoDeUso($this->mockRepo);

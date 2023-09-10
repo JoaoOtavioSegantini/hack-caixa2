@@ -22,7 +22,7 @@ class PostagemControladorUnitTest extends TestCase
             [], 1, 1, 1, 1, 1, 1, 1,
         ]);
 
-        $mockUseCase = Mockery::mock(Lista::class);
+        $mockUseCase = Mockery::mock(ListarPostagensCasoDeUso::class);
         $mockUseCase->shouldReceive('executar')->andReturn($mockDtoOutput);
 
         $controller = new PostagemControlador();

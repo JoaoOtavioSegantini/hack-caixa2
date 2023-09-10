@@ -11,7 +11,6 @@ use Throwable;
 class PostagemUnitTest extends TestCase
 {
     protected $titulo = 'Novo titulo';
-
     protected $texto = 'Novo texto';
 
     public function testAtributos()
@@ -23,10 +22,9 @@ class PostagemUnitTest extends TestCase
 
         $this->assertNotEmpty($postagem->createdAt());
         $this->assertNotEmpty($postagem->id());
-#        $this->assertNotEmpty($postagem->slug);
         $this->assertEquals($this->titulo, $postagem->titulo);
         $this->assertEquals($this->texto, $postagem->texto);
-#        $this->assertEquals(Postagem::slugify($this->titulo), $postagem->slug);
+        $this->assertEquals('novo-titulo', Postagem::slugify($this->titulo));
     }
 
 
@@ -49,14 +47,15 @@ class PostagemUnitTest extends TestCase
         $this->assertEquals($uuid, $postagem->id());
         $this->assertEquals('new_title', $postagem->titulo);
         $this->assertEquals('new_text', $postagem->texto);
+        $this->assertEquals('new-title', $postagem->slug);
     }
 
     public function testExcecaoTitulo()
     {
         try {
             new Postagem(
-                titulo: '',
-                texto: $this->texto
+                titulo: 'tit',
+                texto: $this->texto,
             );
 
             $this->assertTrue(false);
@@ -70,7 +69,7 @@ class PostagemUnitTest extends TestCase
         try {
             new Postagem(
                 titulo: $this->titulo,
-                texto: ''
+                texto: 'tex'
             );
 
             $this->assertTrue(false);

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AtualizarCategoriaRequisicao extends FormRequest
+class AtualizarPostagemRequisicao extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,15 +26,13 @@ class AtualizarCategoriaRequisicao extends FormRequest
         return [
             'titulo' => [
                 'required',
-                'min:3',
+                'min:5',
                 'max:30',
             ],
             'texto' => [
-                'min:3'
-            ],
-            'slug' => [
                 'required',
-            ],
+                'min:5'
+            ]
         ];
     }
 }

@@ -9,7 +9,7 @@ class DominioValidacao
     public static function naoNulo(string $valor, string $excecao = null)
     {
         if (empty($valor)) {
-            throw new EntidadeValidacaoExcecao($excecao ?? 'Não pode ser vazio ou nullo');
+            throw new EntidadeValidacaoExcecao($excecao ?? "Não pode ser vazio ou nullo");
         }
     }
 
