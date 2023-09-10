@@ -1,0 +1,33 @@
+GET http://localhost:8000/api/postagens HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###
+GET http://localhost:8000/api/postagens/e3ddd973-a500-4c75-8090-b8f628f4f236 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###
+POST http://localhost:8000/api/postagens HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "titulo": "um simples titulo",
+    "texto": "lorem ipsum lorem lorem ipsum lorem lorem ipsum"
+}
+
+###
+PUT http://localhost:8000/api/postagens/e3ddd973-a500-4c75-8090-b8f628f4f236 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "titulo": "novo titulo",
+    "texto": "lorem ipsum lorem lorem ipsum lorem lorem ipsum"
+}
+
+###
+DELETE http://localhost:8000/api/postagens/e3ddd973-a500-4c75-8090-b8f628f4f236 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
