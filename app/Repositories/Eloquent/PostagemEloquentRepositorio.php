@@ -24,7 +24,7 @@ class PostagemEloquentRepositorio implements RepositorioPostagemInterface
             'id' => $postagem->id(),
             'titulo' => $postagem->titulo,
             'texto' => $postagem->texto,
-            'slug' => $postagem->slug,
+            'slug' => Postagem::slugify($postagem->titulo),
             'created_at' => $postagem->createdAt(),
         ]);
 
