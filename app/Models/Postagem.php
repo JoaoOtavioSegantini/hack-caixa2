@@ -14,16 +14,17 @@ class Postagem extends Model
         'id',
         'titulo',
         'texto',
-        'slug',
+        'slug'
     ];
 
     public $incrementing = false;
+
+    protected $table = 'postagens';
 
     protected $casts = [
         'id' => 'string',
         'titulo' => 'string',
         'texto' => 'string',
-        'slug' => 'string',
         'deleted_at' => 'datetime',
     ];
 }
